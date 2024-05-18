@@ -1,0 +1,69 @@
+﻿@page "/product"
+@inject IProductService _productService 
+<PageTitle>Product</PageTitle>
+<h1>Product</h1>
+<div>
+     @*<table>
+         <tr>
+             <td>Name:</td>
+             <td>@MyProduct.Name</td>
+         </tr>
+         <tr>
+             <td>Opis:</td>
+             <td>@MyProduct.Description</td>
+         </tr>
+         <tr>
+             <td>Cena jednostkowa:</td>
+             <td>@MyProduct.UnitPrice</td>
+        </tr>
+     </table>*@
+     <table class="table">
+         <thead>
+             <tr>
+                 <th>Name</th>
+                 <th>Description</th>
+                 <th>Price</th>
+             </tr>
+         </thead>
+         <tbody>
+            @foreach(var p in _productList) 
+            { 
+             <tr>
+                 <td>@p.Name</td>
+                 <td>@p.Description</td>
+                 <td>@p.UnitPrice</td>
+             </tr>
+         } 
+         </tbody>
+ 
+     </table>
+</div>
+
+@code {
+     //   public ProductDto MyProduct = new ProductDto() 
+     //{ 
+     //    Name = "Kawa", 
+     //    Description = "Czarna kawa", 
+     //    UnitPrice = 2m 
+     //}; 
+     // private List<ProductDto> _productList = new List<ProductDto>() 
+     //{ 
+     //    new ProductDto() { Name = "Kawa", Description = "Czarna kawa", UnitPrice = 2m }, 
+     //    new ProductDto() {Name = "Herbata", Description = "Pyszna herbata", UnitPrice = 4m } 
+     //}; 
+    // public class ProductDto
+    // { 
+    //     public string Name { get; set; } 
+    //     public string Description { get; set; } 
+    //     public decimal UnitPrice { get; set; } 
+    //} 
+    private List<ProductDto> _productList = new List<ProductDto>(); 
+ 
+     protected override void OnInitialized() 
+     { 
+         base.OnInitialized(); 
+         _productList = _productService.GetAll(); 
+     } 
+    
+ } 
+}
